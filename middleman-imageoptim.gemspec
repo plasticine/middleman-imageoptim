@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.platform    = Gem::Platform::RUBY
   gem.authors     = ["Justin Morris"]
   gem.email       = ["desk@pixelbloom.com"]
-  gem.homepage    = "http://pixelbloom.com"
-  gem.summary     = %q{A short summary of your extension}
-  gem.description = %q{A longer description of your extension}
+  gem.homepage    = "https://github.com/plasticine/middleman-imageoptim"
+  gem.summary     = %q{Small images are small! Compress yours during middleman build.}
+  gem.description = %q{Small images are small! Compress yours during middleman build.}
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
