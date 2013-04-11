@@ -5,11 +5,30 @@ require "fileutils"
 module MiddlemanImageoptim
   class << self
     def registered(app, options={})
-      app.set :threads, 8
+      app.set :verbose, false
+      app.set :nice, true
+      app.set :threads, true
       app.set :image_extensions, %w(.png .jpg .gif)
+      app.set :pngcrush_options, {:chunks => ['alla'], :fix => false, :brute => false}
+      app.set :pngout_options, {:copy_chunks => false, :strategy => 0}
+      app.set :optipng_options, {:level => 6, :interlace => false}
+      app.set :advpng_options, {:level => 4}
+      app.set :jpegoptim_options, {:strip => ['all'], :max_quality => 100}
+      app.set :jpegtran_options, {:copy_chunks => false, :progressive => true, :jpegrescan => true}
+      app.set :gifsicle_options, {:interlace => false}
 
       app.after_build do |builder|
-        image_optim = ImageOptim.new(:threads => threads)
+        image_optim = ImageOptim.new(
+          :nice => nice,
+          :threads => threads,
+          :pngcrush => pngcrush_options,
+          :pngout => pngout_options,
+          :optipng => optipng_options,
+          :advpng => advpng_options,
+          :jpegoptim => jpegoptim_options,
+          :jpegtran => jpegtran_options,
+          :gifsicle => gifsicle_options
+        )
         optimizable_paths = []
         paths = ::Middleman::Util.all_files_under(self.class.inst.build_dir)
 
@@ -31,9 +50,11 @@ module MiddlemanImageoptim
         image_optim.optimize_images(optimizable_paths) do |src, dst|
           if dst
             size_change_word = (src.size - dst.size) > 0 ? 'smaller' : 'larger'
-            percent_change = '%5.2f%% %s' % [100 - 100.0 * dst.size / src.size, (src.size - dst.size)]
-            builder.say_status :optimise, "#{src} (#{number_to_human_size((src.size - dst.size).abs)} / #{percent_change} #{size_change_word})"
+            percent_change = '%.2f%%' % [100 - 100.0 * dst.size / src.size]
+            builder.say_status :img_optimise, "#{src} (#{percent_change} / #{number_to_human_size((src.size - dst.size).abs)} #{size_change_word})"
             FileUtils.mv(dst, src)
+          elsif verbose
+            builder.say_status :img_optimise, "#{src} (skipped)"
           end
         end
       end
