@@ -9,7 +9,7 @@ Compress and optimise your imagery during `middleman build` by running [image_op
 Go set up the [image_optim](https://github.com/toy/image_optim) external utilities, then;
 
 ```ruby
-gem "middleman-imageoptim", "0.0.2"
+gem "middleman-imageoptim", "0.0.3"
 ```
 
 ## Usage

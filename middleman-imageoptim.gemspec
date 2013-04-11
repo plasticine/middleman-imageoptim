@@ -4,7 +4,7 @@ require File.expand_path('../lib/middleman-imageoptim/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name        = "middleman-imageoptim"
-  gem.version   = MiddlemanImageoptim::VERSION
+  gem.version     = MiddlemanImageoptim::VERSION
   gem.platform    = Gem::Platform::RUBY
   gem.authors     = ["Justin Morris"]
   gem.email       = ["desk@pixelbloom.com"]
