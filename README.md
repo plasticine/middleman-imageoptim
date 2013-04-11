@@ -4,6 +4,8 @@
 
 Serving big images is fo numb-skulls! Compress and optimise your imagery during `middleman build` by running [image_optim](https://github.com/toy/image_optim) over it. Yay-hooray!
 
+![](http://cl.ly/image/0h0b330F2p3C/Terminal%20%E2%80%94%20zsh%20%E2%80%94%20109%C3%9712.png)
+
 ## Installation
 
 Go set up the [image_optim](https://github.com/toy/image_optim) external utilities, then;
