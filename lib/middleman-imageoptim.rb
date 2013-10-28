@@ -6,3 +6,10 @@ require "middleman-imageoptim/options"
   require "middleman-imageoptim/extension"
   ::Middleman::Imageoptim
 end
+
+::Middleman::Extensions.register(:image_optim) do
+  warn ":image_optim is deprecated. Please use `:imageoptim` instead."
+
+  require "middleman-imageoptim/extension"
+  ::Middleman::Imageoptim
+end
