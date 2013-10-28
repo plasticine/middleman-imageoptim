@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+export COVERAGE=true
+
 bundle --binstubs | grep -v '^Using'
 
 rm -rf coverage
 
-bin/rake spec
+bin/rake
 
 script/quality
