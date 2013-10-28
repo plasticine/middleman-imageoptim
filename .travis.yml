@@ -5,3 +5,7 @@ rvm:
   - 1.9.3
 after_success:
   - script/quality
+matrix:
+  include:
+    - rvm: 2.0.0
+      env: COVERAGE=true
