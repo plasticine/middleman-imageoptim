@@ -2,13 +2,10 @@ module Middleman
   module Imageoptim
     require "image_optim"
     require "fileutils"
-    require "padrino-helpers"
 
     # Optimizer class that accepts an options object and processes files and
     # passes them off to image_optim to be processed
     class Optimizer
-      include ::Padrino::Helpers::NumberHelpers
-
       def initialize(app, builder, options)
         @app           = app
         @builder       = builder
@@ -42,10 +39,6 @@ module Middleman
 
       def image_is_optimizable(path)
         optimizer.optimizable?(path)
-      end
-
-      def format_size(bytes)
-        number_to_human_size(bytes)
       end
 
       def size_change_word(size_src, size_dst)
@@ -94,6 +87,21 @@ module Middleman
           :jpegtran  => @options.jpegtran_options,
           :gifsicle  => @options.gifsicle_options
         )
+      end
+
+      def format_size(bytes)
+        units = %W(B KiB MiB GiB TiB)
+
+        if bytes.to_i < 1024
+          exponent = 0
+        else
+          max_exp  = UNITS.size - 1
+          exponent = (Math.log(bytes) / Math.log(1024)).to_i
+          exponent = max_exp if exponent > max_exp
+          bytes  /= 1024 ** exponent
+        end
+
+        "#{bytes}#{UNITS[exponent]}"
       end
     end
   end
