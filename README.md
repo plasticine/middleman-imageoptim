@@ -5,6 +5,7 @@
 Serving big images is fo numb-skulls! Compress and optimise your imagery during `middleman build` by running [image_optim](https://github.com/toy/image_optim) over it. Yay-hooray!
 
 [![Build Status](https://travis-ci.org/plasticine/middleman-imageoptim.png?branch=master)](https://travis-ci.org/plasticine/middleman-imageoptim)
+[![Coverage Status](https://coveralls.io/repos/plasticine/middleman-imageoptim/badge.png)](https://coveralls.io/r/plasticine/middleman-imageoptim)
 [![Gem Version](https://badge.fury.io/rb/middleman-imageoptim.png)](http://badge.fury.io/rb/middleman-imageoptim)
 [![Dependency Status](https://gemnasium.com/plasticine/middleman-imageoptim.png)](https://gemnasium.com/plasticine/middleman-imageoptim)
 
