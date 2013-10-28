@@ -16,7 +16,7 @@ Serving big images is fo numb-skulls! Compress and optimise your imagery during 
 Go set up the [image_optim](https://github.com/toy/image_optim) external utilities, then;
 
 ```ruby
-gem "middleman-imageoptim", "~> 0.1.0"
+gem "middleman-imageoptim", "~> 0.1.1"
 ```
 
 ## Usage
@@ -55,6 +55,9 @@ end
 ***
 
 ## Changelog
+
+##### `0.1.1`
+- remove legacy requirement for padrino
 
 ##### `0.1.0`
 - complete refactor and clean-up
