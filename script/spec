@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+bundle --binstubs | grep -v '^Using'
+
+rm -rf coverage
+
+bin/rake spec
+
+script/quality

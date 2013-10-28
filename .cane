@@ -1,0 +1,4 @@
+--abc-max 10
+--gte coverage/covered_percent,100
+--no-style
+--color

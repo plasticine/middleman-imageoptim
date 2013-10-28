@@ -3,3 +3,5 @@ bundler_args: --binstubs
 rvm:
   - 2.0.0
   - 1.9.3
+after_success:
+  - script/quality

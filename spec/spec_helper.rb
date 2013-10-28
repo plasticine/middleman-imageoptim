@@ -1,4 +1,5 @@
 if ENV['COVERAGE']
+  require_relative 'use_coveralls' if ENV['TRAVIS']
   require_relative 'use_simplecov'
 end
 
