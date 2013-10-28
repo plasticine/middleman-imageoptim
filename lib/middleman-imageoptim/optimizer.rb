@@ -4,6 +4,8 @@ module Middleman
     require "fileutils"
     require "padrino-helpers"
 
+    # Optimizer class that accepts an options object and processes files and
+    # passes them off to image_optim to be processed
     class Optimizer
       include ::Padrino::Helpers::NumberHelpers
 
@@ -19,23 +21,13 @@ module Middleman
         optimizer.optimize_images(images_to_optimize) {|src_file, dst_file|
           if dst_file
             @total_savings += (src_file.size - dst_file.size)
-            say_status "#{src_file} (#{percentage_change(src_file.size, dst_file.size)} / #{format_size((src_file.size - dst_file.size))} #{size_change_word(src_file.size, dst_file.size)})"
+            say_file_size_stats(src_file, dst_file)
             FileUtils.mv dst_file, src_file
           elsif @options.verbose
             say_status "[skipped] #{src_file}"
           end
         }
         say_status "Total image savings: #{format_size(@total_savings)}"
-      end
-
-      def say_status(status)
-        if @builder
-          @builder.say_status :image_optim, status
-        end
-      end
-
-      def file_paths
-        ::Middleman::Util.all_files_under(@app.inst.build_dir)
       end
 
       def filter_file_paths(paths)
@@ -69,6 +61,25 @@ module Middleman
 
       def percentage_change(size_src, size_dst)
         '%.2f%%' % [100 - 100.0 * size_dst / size_src]
+      end
+
+      private
+
+      def file_paths
+        ::Middleman::Util.all_files_under(@app.inst.build_dir)
+      end
+
+      def say_file_size_stats(src_file, dst_file)
+        file_percent_change = percentage_change(src_file.size, dst_file.size)
+        file_size_change = format_size((src_file.size - dst_file.size))
+        file_size_change_type = size_change_word(src_file.size, dst_file.size)
+        say_status "#{src_file} (#{file_percent_change} / #{file_size_change} #{file_size_change_type})"
+      end
+
+      def say_status(status)
+        if @builder
+          @builder.say_status :image_optim, status
+        end
       end
 
       def optimizer

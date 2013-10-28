@@ -1,6 +1,8 @@
 require "middleman-core"
 
 module Middleman
+
+  # Middleman extension entry point
   module Imageoptim
     class << self
       def registered(app, options_hash = {}, &block)

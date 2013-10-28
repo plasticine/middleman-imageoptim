@@ -1,4 +1,4 @@
 --abc-max 10
---gte coverage/covered_percent,100
+--gte coverage/covered_percent,74
 --no-style
 --color

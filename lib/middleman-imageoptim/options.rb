@@ -1,5 +1,8 @@
 module Middleman
   module Imageoptim
+
+    # An options store that handles default options will accept user defined
+    # overrides
     class Options
       attr_accessor :user_options
       attr_reader :verbose, :nice, :threads, :image_extensions,
