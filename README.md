@@ -6,6 +6,7 @@ Serving big images is fo numb-skulls! Compress and optimise your imagery during 
 
 [![Build Status](https://travis-ci.org/plasticine/middleman-imageoptim.png?branch=master)](https://travis-ci.org/plasticine/middleman-imageoptim)
 [![Gem Version](https://badge.fury.io/rb/middleman-imageoptim.png)](http://badge.fury.io/rb/middleman-imageoptim)
+[![Dependency Status](https://gemnasium.com/plasticine/middleman-imageoptim.png)](https://gemnasium.com/plasticine/middleman-imageoptim)
 
 ![](http://cl.ly/image/0h0b330F2p3C/Terminal%20%E2%80%94%20zsh%20%E2%80%94%20109%C3%9712.png)
 
