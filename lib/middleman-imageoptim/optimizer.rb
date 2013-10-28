@@ -95,13 +95,13 @@ module Middleman
         if bytes.to_i < 1024
           exponent = 0
         else
-          max_exp  = UNITS.size - 1
+          max_exp  = units.size - 1
           exponent = (Math.log(bytes) / Math.log(1024)).to_i
           exponent = max_exp if exponent > max_exp
           bytes  /= 1024 ** exponent
         end
 
-        "#{bytes}#{UNITS[exponent]}"
+        "#{bytes}#{units[exponent]}"
       end
     end
   end
