@@ -59,4 +59,4 @@ end
 ##### `0.1.0`
 - complete refactor and clean-up
 - introduced an options class. options now work (lol, yay!), thanks @andrew-aladev for your help there
-- change of extension activation name from `:image_optim to `:imageoptim` for consistency with internal naming
+- change of extension activation name from `:image_optim` to `:imageoptim` for consistency with internal naming
