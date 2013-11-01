@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/plasticine/middleman-imageoptim"
   gem.summary       = %q{Small images are small! Compress yours during middleman build.}
   gem.description   = %q{Small images are small! Compress yours during middleman build.}
-
+  gem.license       = 'MIT'
   gem.files         = `git ls-files`.split("\n")
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.require_paths = ["lib"]

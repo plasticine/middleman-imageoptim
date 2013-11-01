@@ -2,7 +2,7 @@
 
 ## Wat.
 
-Serving big images is fo numb-skulls! Compress and optimise your imagery during `middleman build` by running [image_optim](https://github.com/toy/image_optim) over it. Yay-hooray!
+Serving big images is for numb-skulls! Compress and optimise your imagery during `middleman build` by running [image_optim](https://github.com/toy/image_optim) over it. Aww yiss!
 
 [![Build Status](https://travis-ci.org/plasticine/middleman-imageoptim.png?branch=master)](https://travis-ci.org/plasticine/middleman-imageoptim)
 [![Coverage Status](https://coveralls.io/repos/plasticine/middleman-imageoptim/badge.png)](https://coveralls.io/r/plasticine/middleman-imageoptim)
@@ -16,7 +16,7 @@ Serving big images is fo numb-skulls! Compress and optimise your imagery during 
 Go set up the [image_optim](https://github.com/toy/image_optim) external utilities, then;
 
 ```ruby
-gem "middleman-imageoptim", "~> 0.1.2"
+gem "middleman-imageoptim", "~> 0.1.3"
 ```
 
 ## Usage
@@ -55,6 +55,9 @@ end
 ***
 
 ## Changelog
+
+##### `0.1.3`
+- fix missing license in gemspec
 
 ##### `0.1.2`
 - minor bugfix
