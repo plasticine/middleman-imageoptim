@@ -9,9 +9,14 @@ module Middleman
         options = Middleman::Imageoptim::Options.new(options_hash)
         yield options.user_options if block_given?
 
-        app.after_build {|builder|
-          Middleman::Imageoptim::Optimizer.new(app, builder, options).optimize!
-        }
+        app.after_configuration do
+
+          app.after_build  do |builder|
+            Middleman::Imageoptim::Optimizer.new(app, builder, options).optimize!
+          end
+
+        end
+
       end
       alias :included :registered
     end
