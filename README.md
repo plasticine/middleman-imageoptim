@@ -16,7 +16,7 @@ Serving big images is for numb-skulls! Compress and optimise your imagery during
 Go set up the [image_optim](https://github.com/toy/image_optim) external utilities, then;
 
 ```ruby
-gem "middleman-imageoptim", "~> 0.1.3"
+gem "middleman-imageoptim", "~> 0.1.4"
 ```
 
 ## Usage
@@ -55,6 +55,9 @@ end
 ***
 
 ## Changelog
+
+##### `0.1.4`
+- Respect plugin ordering in config.rb (thanks @jeffutter) [#8](https://github.com/plasticine/middleman-imageoptim/pull/8)
 
 ##### `0.1.3`
 - fix missing license in gemspec
