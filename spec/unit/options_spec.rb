@@ -8,7 +8,7 @@ describe Middleman::Imageoptim::Options do
     its(:verbose) { should be_false }
     its(:nice) { should be_true }
     its(:threads) { should be_true }
-    its(:image_extensions) { should == ['.png', '.jpg', '.jpeg', '.gif'] }
+    its(:image_extensions) { should == ['.png', '.jpg', '.jpeg', '.gif', '.svg'] }
     its(:pngcrush_options) { should == {:chunks => ['alla'], :fix => false, :brute => false} }
     its(:pngout_options) { should == {:copy_chunks => false, :strategy => 0} }
     its(:optipng_options) { should == {:level => 6, :interlace => false} }
@@ -16,6 +16,7 @@ describe Middleman::Imageoptim::Options do
     its(:jpegoptim_options) { should == {:strip => ['all'], :max_quality => 100} }
     its(:jpegtran_options) { should == {:copy_chunks => false, :progressive => true, :jpegrescan => true} }
     its(:gifsicle_options) { should == {:interlace => false} }
+    its(:svgo_options) { should == {} }
   end
 
   describe "with user options" do
@@ -72,6 +73,11 @@ describe Middleman::Imageoptim::Options do
     describe "#gifsicle_options" do
       let(:options_hash) { {gifsicle_options: {foo: 'bar'}} }
       subject { options.gifsicle_options().should == {foo: 'bar'} }
+    end
+
+    describe "#svgo_options" do
+      let(:options_hash) { {svgo_options: {foo: 'bar'}} }
+      subject { options.svgo_options().should == {foo: 'bar'} }
     end
   end
 end

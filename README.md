@@ -41,7 +41,7 @@ activate :imageoptim do |options|
   options.threads = true
 
   # Image extensions to attempt to compress
-  options.image_extensions = %w(.png .jpg .gif)
+  options.image_extensions = %w(.png .jpg .gif .svg)
 
   # compressor worker options, individual optimisers can be disabled by passing
   # false instead of a hash
@@ -52,6 +52,7 @@ activate :imageoptim do |options|
   options.jpegoptim_options = {:strip => ['all'], :max_quality => 100}
   options.jpegtran_options  = {:copy_chunks => false, :progressive => true, :jpegrescan => true}
   options.gifsicle_options  = {:interlace => false}
+  options.svgo_options      = {}
 end
 ```
 

@@ -85,7 +85,8 @@ module Middleman
           :advpng    => @options.advpng_options,
           :jpegoptim => @options.jpegoptim_options,
           :jpegtran  => @options.jpegtran_options,
-          :gifsicle  => @options.gifsicle_options
+          :gifsicle  => @options.gifsicle_options,
+          :svgo      => @options.svgo_options
         )
       end
 
