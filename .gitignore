@@ -4,3 +4,5 @@ pkg
 .bundle
 bin
 coverage
+tmp
+fixtures/*/build
