@@ -3,7 +3,7 @@ require_relative "../../lib/middleman-imageoptim/optimizer"
 describe Middleman::Imageoptim::Optimizer do
   subject(:optimizer) { Middleman::Imageoptim::Optimizer.new(app, builder, options) }
   let(:options) { Middleman::Imageoptim::Options.new() }
-  let(:app) { double }
+  let(:app) { double(:inst => double({:build_dir => 'build'})) }
   let(:builder) { double }
   let(:size_src) { 1000 }
   let(:size_dst) { 1000 }
