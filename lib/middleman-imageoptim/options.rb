@@ -30,7 +30,7 @@ module Middleman
       end
 
       def image_extensions
-        !@user_options.image_extensions.nil? ? @user_options.image_extensions : %w(.png .jpg .gif)
+        !@user_options.image_extensions.nil? ? @user_options.image_extensions : %w(.png .jpg .jpeg .gif)
       end
 
       def pngcrush_options

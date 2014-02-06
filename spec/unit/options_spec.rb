@@ -8,7 +8,7 @@ describe Middleman::Imageoptim::Options do
     its(:verbose) { should be_false }
     its(:nice) { should be_true }
     its(:threads) { should be_true }
-    its(:image_extensions) { should == ['.png', '.jpg', '.gif'] }
+    its(:image_extensions) { should == ['.png', '.jpg', '.jpeg', '.gif'] }
     its(:pngcrush_options) { should == {:chunks => ['alla'], :fix => false, :brute => false} }
     its(:pngout_options) { should == {:copy_chunks => false, :strategy => 0} }
     its(:optipng_options) { should == {:level => 6, :interlace => false} }
