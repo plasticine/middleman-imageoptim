@@ -19,9 +19,6 @@ module Middleman
         end
         @options = options
       end
-      #alias :included :registered
-
-
 
       def manipulate_resource_list(resources)
         modified_resources = []

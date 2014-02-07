@@ -18,15 +18,6 @@ module Middleman
       def optimize!
         images_to_optimize = updated_file_paths(file_paths())
 
-        #images_to_optimize.each do |file|
-          #if File.mtime(file) == @previous_manifest[file.to_s]
-            #say_status "[skipped] #{file}"
-            #next
-          #end
-          #optimizer.optimize_image!(file)
-          #@current_manifest[file.to_s] = File.mtime(file)
-        #end
-        
         optimizer.optimize_images(images_to_optimize) {|src_file, dst_file|
           if dst_file
             @total_savings += (src_file.size - dst_file.size)
