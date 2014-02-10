@@ -4,6 +4,7 @@ rvm:
   - 2.1.0
   - 2.0.0
   - 1.9.3
+install: apt-get install jpegoptim
 after_success:
   - script/quality
 matrix:
