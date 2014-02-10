@@ -5,7 +5,7 @@ rvm:
   - 2.0.0
   - 1.9.3
 before_install:
-  - sudo apt-get install -qq jpegoptim
+  - sudo apt-get install -qq jpegoptim libjpeg-progs
 after_success:
   - script/quality
 matrix:
