@@ -2,6 +2,10 @@ Then(/^the file "(.*?)" should be (\d+) bytes$/) do |img, size|
   File.size(File.join(current_dir,img)).should == size.to_i
 end
 
+Then(/^the file "(.*?)" should be less than (\d+) bytes$/) do |img, size|
+  File.size(File.join(current_dir,img)).should be < size.to_i
+end
+
 Then(/^the manifest should have the right timestamp for "(.*?)"$/) do |file|
   manifest = YAML::load( File.open(manifest_path).read )
   file_stamp = File.mtime( File.join(current_dir,file) )

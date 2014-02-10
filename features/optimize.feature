@@ -11,7 +11,7 @@ Feature: Generating SVG clowncars during preview mode
     When I cd to "build"
     Then the following files should exist:
       | images/haters.jpg                       |
-    Then the file "images/haters.jpg" should be 8958 bytes
+    Then the file "images/haters.jpg" should be less than 10088 bytes
 
   Scenario: Storing timpestamps to avoid re-optiming
     Given a fixture app "imageoptim-app"
