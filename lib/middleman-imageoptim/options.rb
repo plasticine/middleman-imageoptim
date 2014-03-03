@@ -7,11 +7,11 @@ module Middleman
       attr_accessor :user_options
       attr_reader :verbose, :nice, :threads, :image_extensions,
         :pngcrush_options, :pngout_options, :optipng_options, :advpng_options,
-        :jpegoptim_options, :jpegtran_options, :gifsicle_options
+        :jpegoptim_options, :jpegtran_options, :gifsicle_options, :svgo_options
 
       UserOptions = Struct.new(:verbose, :nice, :threads, :image_extensions,
         :pngcrush_options, :pngout_options, :optipng_options, :advpng_options,
-        :jpegoptim_options, :jpegtran_options, :gifsicle_options)
+        :jpegoptim_options, :jpegtran_options, :gifsicle_options, :svgo_options)
 
       def initialize(options_hash = {})
         @user_options = UserOptions.new(*options_hash)
@@ -30,7 +30,7 @@ module Middleman
       end
 
       def image_extensions
-        !@user_options.image_extensions.nil? ? @user_options.image_extensions : %w(.png .jpg .jpeg .gif)
+        !@user_options.image_extensions.nil? ? @user_options.image_extensions : %w(.png .jpg .jpeg .gif .svg)
       end
 
       def pngcrush_options
@@ -59,6 +59,10 @@ module Middleman
 
       def gifsicle_options
         !@user_options.gifsicle_options.nil? ? @user_options.gifsicle_options : {:interlace => false}
+      end
+
+      def svgo_options
+        !@user_options.svgo_options.nil? ? @user_options.svgo_options : {}
       end
     end
   end
