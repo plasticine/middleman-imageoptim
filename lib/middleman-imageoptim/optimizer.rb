@@ -11,10 +11,13 @@ module Middleman
         @builder       = builder
         @options       = options
         @total_savings = 0
+        @current_manifest = {}
+        @previous_manifest = load_manifest || {}
       end
 
       def optimize!
-        images_to_optimize = filter_file_paths(file_paths())
+        images_to_optimize = updated_file_paths(file_paths())
+
         optimizer.optimize_images(images_to_optimize) {|src_file, dst_file|
           if dst_file
             @total_savings += (src_file.size - dst_file.size)
@@ -24,12 +27,19 @@ module Middleman
             say_status "[skipped] #{src_file}"
           end
         }
+        build_and_write_manifest
         say_status "Total image savings: #{format_size(@total_savings)}"
       end
 
       def filter_file_paths(paths)
         paths.select {|path|
           is_image_extension(path.extname) && image_is_optimizable(path)
+        }
+      end
+
+      def updated_file_paths(paths)
+        filter_file_paths(paths).select{|path|
+          File.mtime(path) != @previous_manifest[path.to_s]
         }
       end
 
@@ -60,6 +70,36 @@ module Middleman
 
       def file_paths
         ::Middleman::Util.all_files_under(@app.inst.build_dir)
+      end
+
+      def manifest_path
+        File.join(@app.inst.build_dir,"imageoptim.manifest.bin")
+      end
+
+      def build_and_write_manifest
+        build_manifest
+        write_manifest
+      end
+
+      def build_manifest
+        files = filter_file_paths(file_paths())
+        files.each do |file|
+          @current_manifest[file.to_s] = File.mtime(file)
+        end
+      end
+
+      def write_manifest
+        File.open(manifest_path, 'w') {|f| f.write(serialized_manifest) }
+      end
+
+      def serialized_manifest
+        YAML::dump(@current_manifest)
+      end
+
+      def load_manifest
+        manifest = YAML::load( File.open(manifest_path).read )
+      rescue Errno::ENOENT => e
+        {}
       end
 
       def say_file_size_stats(src_file, dst_file)
