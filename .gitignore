@@ -6,3 +6,4 @@ bin
 coverage
 tmp
 fixtures/*/build
+*.gem
