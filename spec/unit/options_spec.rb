@@ -5,9 +5,9 @@ describe Middleman::Imageoptim::Options do
   let(:options_hash) { {} }
 
   describe "default options" do
-    its(:verbose) { should be_false }
-    its(:nice) { should be_true }
-    its(:threads) { should be_true }
+    its(:verbose) { should be_falsey }
+    its(:nice) { should be_truthy }
+    its(:threads) { should be_truthy }
     its(:image_extensions) { should == ['.png', '.jpg', '.jpeg', '.gif', '.svg'] }
     its(:pngcrush_options) { should == {:chunks => ['alla'], :fix => false, :brute => false} }
     its(:pngout_options) { should == {:copy_chunks => false, :strategy => 0} }
@@ -22,17 +22,17 @@ describe Middleman::Imageoptim::Options do
   describe "with user options" do
     describe "#verbose" do
       let(:options_hash) { {verbose: true} }
-      subject { options.verbose().should be_true }
+      subject { options.verbose().should be_truthy }
     end
 
     describe "#nice" do
       let(:options_hash) { {nice: false} }
-      subject { options.nice().should be_false }
+      subject { options.nice().should be_falsey }
     end
 
     describe "#threads" do
       let(:options_hash) { {threads: false} }
-      subject { options.threads().should be_false }
+      subject { options.threads().should be_falsey }
     end
 
     describe "#image_extensions" do
