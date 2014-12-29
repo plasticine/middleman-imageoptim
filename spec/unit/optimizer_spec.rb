@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative "../../lib/middleman-imageoptim/optimizer"
 
 describe Middleman::Imageoptim::Optimizer do
