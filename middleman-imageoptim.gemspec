@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency "middleman-core", [">= 3.0"]
-  gem.add_dependency "image_optim", "~> 0.12.0"
+  gem.add_dependency "image_optim", "~> 0.19.0"
 
   gem.add_development_dependency "rspec", ">= 3.0.0"
   gem.add_development_dependency "rspec-its"
