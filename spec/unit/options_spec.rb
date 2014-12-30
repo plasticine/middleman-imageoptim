@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative "../../lib/middleman-imageoptim/options"
 
 describe Middleman::Imageoptim::Options do
