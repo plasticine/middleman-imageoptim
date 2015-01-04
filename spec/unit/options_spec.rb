@@ -1,84 +1,126 @@
 require 'spec_helper'
-require_relative "../../lib/middleman-imageoptim/options"
+require_relative '../../lib/middleman-imageoptim/options'
 
 describe Middleman::Imageoptim::Options do
-  subject { Middleman::Imageoptim::Options.new(options_hash) }
   let(:options_hash) { {} }
+  let(:instance) { described_class.new(options_hash) }
+  subject { instance }
 
-  describe "default options" do
+  describe 'default options' do
     its(:verbose) { should be_falsey }
     its(:nice) { should be_truthy }
     its(:threads) { should be_truthy }
+    its(:skip_missing_workers) { should be_truthy }
+    its(:allow_lossy) { should be_falsey }
     its(:image_extensions) { should == ['.png', '.jpg', '.jpeg', '.gif', '.svg'] }
-    its(:pngcrush_options) { should == {:chunks => ['alla'], :fix => false, :brute => false} }
-    its(:pngout_options) { should == {:copy_chunks => false, :strategy => 0} }
-    its(:optipng_options) { should == {:level => 6, :interlace => false} }
-    its(:advpng_options) { should == {:level => 4} }
-    its(:jpegoptim_options) { should == {:strip => ['all'], :max_quality => 100} }
-    its(:jpegtran_options) { should == {:copy_chunks => false, :progressive => true, :jpegrescan => true} }
-    its(:gifsicle_options) { should == {:interlace => false} }
-    its(:svgo_options) { should == {} }
+    its(:pngcrush) { should == { chunks: ['alla'], fix: false, brute: false } }
+    its(:pngout) { should == { copy_chunks: false, strategy: 0 } }
+    its(:optipng) { should == { level: 6, interlace: false } }
+    its(:advpng) { should == { level: 4 } }
+    its(:jpegoptim) { should == { strip: ['all'], max_quality: 100 } }
+    its(:jpegtran) { should == { copy_chunks: false, progressive: true, jpegrescan: true } }
+    its(:gifsicle) { should == { interlace: false } }
+    its(:svgo) { should == {} }
   end
 
-  describe "with user options" do
-    describe "#verbose" do
-      let(:options_hash) { {verbose: true} }
-      subject { options.verbose().should be_truthy }
+  describe 'getting options for imageoptim' do
+    describe '#imageoptim_options' do
+      subject { instance.imageoptim_options }
+      let(:options_hash) do
+        { verbose: true, manifest: false, image_extensions: ['.gif'] }
+      end
+      it do
+        is_expected.to eql(
+          advpng: { level: 4 },
+          allow_lossy: false,
+          gifsicle: { interlace: false },
+          jpegoptim: { strip: ['all'], max_quality: 100 },
+          jpegtran: { copy_chunks: false, progressive: true, jpegrescan: true },
+          nice: true,
+          optipng: { level: 6, interlace: false },
+          pack: true,
+          pngcrush: { chunks: ['alla'], fix: false, brute: false },
+          pngout: { copy_chunks: false, strategy: 0 },
+          skip_missing_workers: true,
+          svgo: {},
+          threads: true,
+          verbose: true
+        )
+      end
+    end
+  end
+
+  describe 'with user options' do
+    describe '#verbose' do
+      subject { instance.verbose }
+      let(:options_hash) { { verbose: true } }
+      it { is_expected.to be_truthy }
     end
 
-    describe "#nice" do
-      let(:options_hash) { {nice: false} }
-      subject { options.nice().should be_falsey }
+    describe '#nice' do
+      subject { instance.nice }
+      let(:options_hash) { { nice: false } }
+      it { is_expected.to be_falsey }
     end
 
-    describe "#threads" do
-      let(:options_hash) { {threads: false} }
-      subject { options.threads().should be_falsey }
+    describe '#threads' do
+      subject { instance.threads }
+      let(:options_hash) { { threads: false } }
+      it { is_expected.to be_falsey }
     end
 
-    describe "#image_extensions" do
-      let(:options_hash) { {image_extensions: ['.gif']} }
-      subject { options.image_extensions().should == ['.gif'] }
+    describe '#image_extensions' do
+      subject { instance.image_extensions }
+      let(:options_hash) { { image_extensions: ['.gif'] } }
+      it { is_expected.to eq(['.gif']) }
     end
 
-    describe "#pngcrush_options" do
-      let(:options_hash) { {pngcrush_options: {foo: 'bar'}} }
-      subject { options.pngcrush_options().should == {foo: 'bar'} }
+    describe '#pngcrush_options' do
+      subject { instance.pngcrush }
+      let(:options_hash) { { pngcrush: { foo: 'bar' } } }
+      it { is_expected.to eq(foo: 'bar') }
     end
 
-    describe "#pngout_options" do
-      let(:options_hash) { {pngout_options: {foo: 'bar'}} }
-      subject { options.pngout_options().should == {foo: 'bar'} }
+    describe '#pngout' do
+      subject { instance.pngout }
+      let(:options_hash) { { pngout: { foo: 'bar' } } }
+      it { is_expected.to eq(foo: 'bar') }
     end
 
-    describe "#optipng_options" do
-      let(:options_hash) { {optipng_options: {foo: 'bar'}} }
-      subject { options.optipng_options().should == {foo: 'bar'} }
+    describe '#optipng' do
+      subject { instance.optipng }
+      let(:options_hash) { { optipng: { foo: 'bar' } } }
+      it { is_expected.to eq(foo: 'bar') }
     end
 
-    describe "#advpng_options" do
-      let(:options_hash) { {advpng_options: {foo: 'bar'}} }
-      subject { options.advpng_options().should == {foo: 'bar'} }
+    describe '#advpng' do
+      subject { instance.advpng }
+      let(:options_hash) { { advpng: { foo: 'bar' } } }
+      it { is_expected.to eq(foo: 'bar') }
     end
 
-    describe "#jpegoptim_options" do
-      let(:options_hash) { {jpegoptim_options: {foo: 'bar'}} }
-      subject { options.jpegoptim_options().should == {foo: 'bar'} }
+    describe '#jpegoptim' do
+      subject { instance.jpegoptim }
+      let(:options_hash) { { jpegoptim: { foo: 'bar' } } }
+      it { is_expected.to eq(foo: 'bar') }
     end
 
-    describe "#jpegtran_options" do
-      let(:options_hash) { {jpegtran_options: {foo: 'bar'}} }
-      subject { options.jpegtran_options().should == {foo: 'bar'} }
+    describe '#jpegtran' do
+      subject { instance.jpegtran }
+      let(:options_hash) { { jpegtran: { foo: 'bar' } } }
+      it { is_expected.to eq(foo: 'bar') }
     end
 
-    describe "#gifsicle_options" do
-      let(:options_hash) { {gifsicle_options: {foo: 'bar'}} }
-      subject { options.gifsicle_options().should == {foo: 'bar'} }
+    describe '#gifsicle' do
+      subject { instance.gifsicle }
+      let(:options_hash) { { gifsicle: { foo: 'bar' } } }
+      it { is_expected.to eq(foo: 'bar') }
     end
 
-    describe "#svgo_options" do
-      let(:options_hash) { {svgo_options: {foo: 'bar'}} }
-      subject { options.svgo_options().should == {foo: 'bar'} }
+    describe '#svgo' do
+      subject { instance.svgo }
+      let(:options_hash) { { svgo: { foo: 'bar' } } }
+      it { is_expected.to eq(foo: 'bar') }
     end
   end
 end

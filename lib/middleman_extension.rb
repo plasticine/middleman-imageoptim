@@ -1,1 +1,1 @@
-require "middleman-imageoptim"
+require 'middleman-imageoptim'

@@ -6,7 +6,6 @@ Serving big images is for numb-skulls! Compress and optimise your imagery during
 
 [![Build Status](https://travis-ci.org/plasticine/middleman-imageoptim.png?branch=master)](https://travis-ci.org/plasticine/middleman-imageoptim)
 [![Code Climate](https://codeclimate.com/github/plasticine/middleman-imageoptim.png)](https://codeclimate.com/github/plasticine/middleman-imageoptim)
-[![Coverage Status](https://coveralls.io/repos/plasticine/middleman-imageoptim/badge.png)](https://coveralls.io/r/plasticine/middleman-imageoptim)
 [![Gem Version](https://badge.fury.io/rb/middleman-imageoptim.png)](http://badge.fury.io/rb/middleman-imageoptim)
 [![Dependency Status](https://gemnasium.com/plasticine/middleman-imageoptim.png)](https://gemnasium.com/plasticine/middleman-imageoptim)
 
@@ -19,7 +18,7 @@ Serving big images is for numb-skulls! Compress and optimise your imagery during
 Go set up the [image_optim](https://github.com/toy/image_optim) external utilities, then;
 
 ```ruby
-gem "middleman-imageoptim", "~> 0.1.4"
+gem 'middleman-imageoptim'
 ```
 
 ## Usage
@@ -33,7 +32,13 @@ Below is the default configuration showing all available options;
 
 ```ruby
 activate :imageoptim do |options|
-  # print out skipped images
+  # Use a build manifest to prevent re-compressing images between builds
+  options.manifest = true
+
+  # Silence problematic image_optim workers
+  options.skip_missing_workers = true
+
+  # Cause image_optim to be in shouty-mode
   options.verbose = false
 
   # Setting these to true or nil will let options determine them (recommended)
@@ -43,16 +48,16 @@ activate :imageoptim do |options|
   # Image extensions to attempt to compress
   options.image_extensions = %w(.png .jpg .gif .svg)
 
-  # compressor worker options, individual optimisers can be disabled by passing
+  # Compressor worker options, individual optimisers can be disabled by passing
   # false instead of a hash
-  options.pngcrush_options  = {:chunks => ['alla'], :fix => false, :brute => false}
-  options.pngout_options    = {:copy_chunks => false, :strategy => 0}
-  options.optipng_options   = {:level => 6, :interlace => false}
-  options.advpng_options    = {:level => 4}
-  options.jpegoptim_options = {:strip => ['all'], :max_quality => 100}
-  options.jpegtran_options  = {:copy_chunks => false, :progressive => true, :jpegrescan => true}
-  options.gifsicle_options  = {:interlace => false}
-  options.svgo_options      = {}
+  options.advpng    = { :level => 4 }
+  options.gifsicle  = { :interlace => false }
+  options.jpegoptim = { :strip => ['all'], :max_quality => 100 }
+  options.jpegtran  = { :copy_chunks => false, :progressive => true, :jpegrescan => true }
+  options.optipng   = { :level => 6, :interlace => false }
+  options.pngcrush  = { :chunks => ['alla'], :fix => false, :brute => false }
+  options.pngout    = { :copy_chunks => false, :strategy => 0 }
+  options.svgo      = {}
 end
 ```
 
@@ -60,19 +65,26 @@ end
 
 ## Changelog
 
+##### `0.2.0`
+- Big cleanup to codebase.
+- More tests.
+- Caching between builds using a manifest file to skip over already-compressed assets (thanks for your work on this @jagthedrummer).
+- Updates `image_optim` gem to latest version (`0.20.2`).
+- Adds dependency on `image_optim_pack` to ensure that binaries are available.
+
 ##### `0.1.4`
-- Respect plugin ordering in config.rb (thanks @jeffutter) [#8](https://github.com/plasticine/middleman-imageoptim/pull/8)
+- Respect plugin ordering in config.rb (thanks @jeffutter) [#8](https://github.com/plasticine/middleman-imageoptim/pull/8).
 
 ##### `0.1.3`
-- fix missing license in gemspec
+- Fix missing license in gemspec.
 
 ##### `0.1.2`
-- minor bugfix
+- Minor bugfix.
 
 ##### `0.1.1`
-- remove legacy requirement for padrino
+- Remove legacy requirement for padrino.
 
 ##### `0.1.0`
-- complete refactor and clean-up
-- introduced an options class. options now work (lol, yay!), thanks @andrew-aladev for your help there
-- change of extension activation name from `:image_optim` to `:imageoptim` for consistency with internal naming
+- Complete refactor and clean-up.
+- Introduced an options class. options now work (lol, yay!), thanks @andrew-aladev for your help there.
+- Change of extension activation name from `:image_optim` to `:imageoptim` for consistency with internal naming.

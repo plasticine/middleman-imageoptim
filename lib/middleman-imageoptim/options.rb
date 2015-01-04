@@ -1,68 +1,54 @@
 module Middleman
   module Imageoptim
-
     # An options store that handles default options will accept user defined
     # overrides
     class Options
-      attr_accessor :user_options
-      attr_reader :verbose, :nice, :threads, :image_extensions,
-        :pngcrush_options, :pngout_options, :optipng_options, :advpng_options,
-        :jpegoptim_options, :jpegtran_options, :gifsicle_options, :svgo_options
+      # Mapping of valid option names to default values
+      EXTENSION_OPTIONS = [
+        :image_extensions,
+        :manifest
+      ]
+      OPTIONS = {
+        advpng: { level: 4 },
+        allow_lossy: false,
+        gifsicle: { interlace: false },
+        image_extensions: %w(.png .jpg .jpeg .gif .svg),
+        jpegoptim: { strip: ['all'], max_quality: 100 },
+        jpegtran: { copy_chunks: false, progressive: true, jpegrescan: true },
+        nice: true,
+        manifest: true,
+        optipng: { level: 6, interlace: false },
+        pack: true,
+        pngcrush: { chunks: ['alla'], fix: false, brute: false },
+        pngout: { copy_chunks: false, strategy: 0 },
+        skip_missing_workers: true,
+        svgo: {},
+        threads: true,
+        verbose: false
+      }
 
-      UserOptions = Struct.new(:verbose, :nice, :threads, :image_extensions,
-        :pngcrush_options, :pngout_options, :optipng_options, :advpng_options,
-        :jpegoptim_options, :jpegtran_options, :gifsicle_options, :svgo_options)
+      attr_accessor *OPTIONS.keys.map(&:to_sym)
 
-      def initialize(options_hash = {})
-        @user_options = UserOptions.new(*options_hash)
+      def initialize(user_options = {})
+        set_options(user_options)
       end
 
-      def verbose
-        !@user_options.verbose.nil? ? @user_options.verbose : false
+      def imageoptim_options
+        Hash[instance_variables.map do |name|
+          [symbolize_key(name), instance_variable_get(name)]
+        end].reject { |key| EXTENSION_OPTIONS.include?(key) }
       end
 
-      def nice
-        !@user_options.nice.nil? ? @user_options.nice : true
+      private
+
+      def symbolize_key(key)
+        key.to_s[1..-1].to_sym
       end
 
-      def threads
-        !@user_options.threads.nil? ? @user_options.threads : true
-      end
-
-      def image_extensions
-        !@user_options.image_extensions.nil? ? @user_options.image_extensions : %w(.png .jpg .jpeg .gif .svg)
-      end
-
-      def pngcrush_options
-        !@user_options.pngcrush_options.nil? ? @user_options.pngcrush_options : {:chunks => ['alla'], :fix => false, :brute => false}
-      end
-
-      def pngout_options
-        !@user_options.pngout_options.nil? ? @user_options.pngout_options : {:copy_chunks => false, :strategy => 0}
-      end
-
-      def optipng_options
-        !@user_options.optipng_options.nil? ? @user_options.optipng_options : {:level => 6, :interlace => false}
-      end
-
-      def advpng_options
-        !@user_options.advpng_options.nil? ? @user_options.advpng_options : {:level => 4}
-      end
-
-      def jpegoptim_options
-        !@user_options.jpegoptim_options.nil? ? @user_options.jpegoptim_options : {:strip => ['all'], :max_quality => 100}
-      end
-
-      def jpegtran_options
-        !@user_options.jpegtran_options.nil? ? @user_options.jpegtran_options : {:copy_chunks => false, :progressive => true, :jpegrescan => true}
-      end
-
-      def gifsicle_options
-        !@user_options.gifsicle_options.nil? ? @user_options.gifsicle_options : {:interlace => false}
-      end
-
-      def svgo_options
-        !@user_options.svgo_options.nil? ? @user_options.svgo_options : {}
+      def set_options(user_options)
+        OPTIONS.keys.each do |name|
+          instance_variable_set(:"@#{name}", user_options.fetch(name, OPTIONS[name]))
+        end
       end
     end
   end
