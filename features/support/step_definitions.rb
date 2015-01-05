@@ -1,3 +1,5 @@
+require 'aruba/api'
+
 Then(/^the file "(.*?)" should be (\d+) bytes$/) do |img, size|
   expect(File.size(File.join(current_dir, img))).to eql(size.to_i)
 end
@@ -27,6 +29,10 @@ end
 
 Given(/^an updated file at "(.*?)"$/) do |file|
   FileUtils.touch(File.join(current_dir, file))
+end
+
+Given(/^the file "([^"]*)" has mode "([^"]*)"$/) do |file_name, file_mode|
+  filesystem_permissions(file_mode, file_name)
 end
 
 Then(/^the file "([^\"]*)" should have been updated$/) do |file|
