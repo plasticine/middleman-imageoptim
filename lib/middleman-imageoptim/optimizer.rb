@@ -50,7 +50,7 @@ module Middleman
       end
 
       def updated_images
-        optimizable_images.select {|path| file_updated?(path) }
+        optimizable_images.select { |path| file_updated?(path) }
       end
 
       def optimizable_images
@@ -92,7 +92,7 @@ module Middleman
       end
 
       def get_file_mode(file)
-        sprintf("%o", File.stat(file).mode)[-4,4].gsub(/^0*/, '')
+        sprintf('%o', File.stat(file).mode)[-4, 4].gsub(/^0*/, '')
       end
 
       def ensure_file_mode(mode, file)
