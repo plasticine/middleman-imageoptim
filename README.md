@@ -1,7 +1,5 @@
 # Middleman ImageOptim Extension
 
-## Wat.
-
 Serving big images is for numb-skulls! Compress and optimise your imagery during `middleman build` by running [image_optim](https://github.com/toy/image_optim) over it. Aww yiss!
 
 [![Build Status](https://travis-ci.org/plasticine/middleman-imageoptim.png?branch=master)](https://travis-ci.org/plasticine/middleman-imageoptim)
