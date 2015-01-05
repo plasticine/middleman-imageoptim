@@ -1,11 +1,26 @@
 #!/usr/bin/env bash
 
-export COVERAGE=true
+set -eo pipefail
 
-bundle --binstubs | grep -v '^Using'
+prepare() {
+  bundle --binstubs | grep -v '^Using'
+  rm -rf coverage
+}
 
-rm -rf coverage
+check_style() {
+  rubocop
+}
 
-bin/rake
+run_tests() {
+  bin/rake spec:unit
+  bin/rake spec:features
+}
 
-script/quality
+main() {
+  prepare
+  check_style
+  run_tests
+
+}
+
+main $@
