@@ -8,11 +8,7 @@ module Middleman
       end
 
       def render(*_args, &_block)
-        Marshal.dump({})
-      end
-
-      def source_file
-        nil
+        manifest_content
       end
 
       def binary?
@@ -29,6 +25,16 @@ module Middleman
 
       def metadata
         @local_metadata.dup
+      end
+
+      private
+
+      def manifest_content
+        if @source_file.nil?
+          YAML.dump({})
+        else
+          File.read(@source_file)
+        end
       end
     end
   end

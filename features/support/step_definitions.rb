@@ -7,15 +7,15 @@ Then(/^the file "(.*?)" should be less than (\d+) bytes$/) do |img, size|
 end
 
 Then(/^the manifest should have the right timestamp for "(.*?)"$/) do |file|
-  manifest = Marshal.load(File.binread(manifest_path))
+  manifest = YAML.load(File.read(manifest_path))
   file_stamp = File.mtime(File.join(current_dir, file))
   expect(manifest[file]).to eql(file_stamp)
 end
 
 Given(/^a primed manifest for "(.*?)"$/) do |file|
   manifest = { file: File.mtime(File.join(current_dir, file)) }
-  File.open(path, 'wb') do |manifest_file|
-    manifest_file.write(Marshal.dump(manifest))
+  File.open(path, 'w') do |manifest_file|
+    manifest_file.write(YAML.dump(manifest))
   end
 end
 
@@ -35,5 +35,5 @@ Then(/^the file "([^\"]*)" should have been updated$/) do |file|
 end
 
 def manifest_path
-  File.join(current_dir, 'build', 'imageoptim.manifest.bin')
+  File.join(current_dir, 'build', 'imageoptim.manifest.yml')
 end
