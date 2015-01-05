@@ -7,9 +7,9 @@ Serving big images is for numb-skulls! Compress and optimise your imagery during
 [![Gem Version](https://badge.fury.io/rb/middleman-imageoptim.png)](http://badge.fury.io/rb/middleman-imageoptim)
 [![Dependency Status](https://gemnasium.com/plasticine/middleman-imageoptim.png)](https://gemnasium.com/plasticine/middleman-imageoptim)
 
-* * *
-
 ![](http://cl.ly/image/0h0b330F2p3C/Terminal%20%E2%80%94%20zsh%20%E2%80%94%20109%C3%9712.png)
+
+* * *
 
 ## Installation
 
