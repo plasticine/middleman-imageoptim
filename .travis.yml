@@ -4,7 +4,12 @@ rvm:
   - 2.1.0
   - 2.0.0
   - 1.9.3
+gemfile:
+  - gemfiles/middleman_3.1.gemfile
+  - gemfiles/middleman_3.2.gemfile
+  - gemfiles/middleman_3.3.gemfile
+  - gemfiles/middleman_4.0_pre.gemfile
 matrix:
-  include:
-    - rvm: 2.0.0
-      env: COVERAGE=true
+  fast_finish: true
+  allow_failures:
+    - gemfile: gemfiles/middleman_4.0_pre.gemfile
