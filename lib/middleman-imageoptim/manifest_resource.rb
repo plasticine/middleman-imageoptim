@@ -1,3 +1,5 @@
+require 'middleman-core/application'
+
 module Middleman
   module Imageoptim
     class ManifestResource < ::Middleman::Sitemap::Resource
