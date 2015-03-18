@@ -63,6 +63,9 @@ end
 
 ## Changelog
 
+##### `0.2.1`
+- Minor bugfix for 3.3.9 support.
+
 ##### `0.2.0`
 - Big cleanup to codebase.
 - More tests.
