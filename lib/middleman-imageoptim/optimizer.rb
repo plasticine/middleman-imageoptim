@@ -72,11 +72,11 @@ module Middleman
       end
 
       def build_files
-        ::Middleman::Util.all_files_under(app.build_dir)
+        ::Middleman::Util.all_files_under(app.config[:build_dir])
       end
 
       def say_status(status, interpolations = {})
-        builder.say_status(:imageoptim, status % interpolations) if builder
+        builder.thor.say_status(:imageoptim, status % interpolations) if builder
       end
 
       def optimizer
