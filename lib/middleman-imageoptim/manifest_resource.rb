@@ -25,10 +25,6 @@ module Middleman
         false
       end
 
-      def metadata
-        @local_metadata.dup
-      end
-
       private
 
       def manifest_content

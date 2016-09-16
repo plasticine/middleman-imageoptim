@@ -27,6 +27,5 @@ Feature: Manifest
     Given a modification time for a file named "build/images/table.jpg"
     Given some time has passed
     Given an updated file at "source/images/table.jpg"
-    Given an updated file at "source/images/table.jpg"
     Given a successfully built app at "basic-app" with flags "--verbose"
     Then the file "build/images/table.jpg" should have been updated

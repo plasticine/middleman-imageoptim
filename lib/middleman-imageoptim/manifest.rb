@@ -10,7 +10,7 @@ module Middleman
       end
 
       def path
-        File.join(app.build_dir, MANIFEST_FILENAME)
+        File.join(app.config[:build_dir], MANIFEST_FILENAME)
       end
 
       def build_and_write(new_resources)
