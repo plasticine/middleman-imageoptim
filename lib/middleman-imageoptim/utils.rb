@@ -24,7 +24,7 @@ module Middleman
           max_exp  = units.size - 1
           exponent = (Math.log(bytes) / Math.log(1024)).to_i
           exponent = max_exp if exponent > max_exp
-          bytes  /= 1024**exponent
+          bytes /= 1024**exponent
         end
         "#{bytes}#{units[exponent]}"
       end

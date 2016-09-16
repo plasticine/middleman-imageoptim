@@ -7,7 +7,7 @@ module Middleman
       EXTENSION_OPTIONS = [
         :image_extensions,
         :manifest
-      ]
+      ].freeze
       OPTIONS = {
         advpng: { level: 4 },
         allow_lossy: false,
@@ -25,7 +25,7 @@ module Middleman
         svgo: {},
         threads: true,
         verbose: false
-      }
+      }.freeze
 
       attr_accessor *OPTIONS.keys.map(&:to_sym)
 

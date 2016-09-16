@@ -1,7 +1,7 @@
 module Middleman
   module Imageoptim
     class Manifest
-      MANIFEST_FILENAME = 'imageoptim.manifest.yml'
+      MANIFEST_FILENAME = 'imageoptim.manifest.yml'.freeze
 
       attr_reader :app
 
