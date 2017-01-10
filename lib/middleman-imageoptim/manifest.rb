@@ -14,7 +14,7 @@ module Middleman
       end
 
       def build_dir
-        if Gem::Version.new(Middleman::VERSION) >= Gem::Version('4.1.9')
+        if Gem::Version.new(Middleman::VERSION) >= Gem::Version.new('4.1.9')
           app.config[:build_dir]
         else
           app.build_dir
