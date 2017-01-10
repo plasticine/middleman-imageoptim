@@ -4,11 +4,14 @@ rvm:
   - 2.1.0
   - 2.0.0
   - 1.9.3
+  - 2.3.3
 gemfile:
-  - gemfiles/middleman_3.1.gemfile
   - gemfiles/middleman_3.2.gemfile
   - gemfiles/middleman_3.3.gemfile
   - gemfiles/middleman_4.0_pre.gemfile
+  - gemfiles/middleman_4.0.gemfile
+  - gemfiles/middleman_4.1.gemfile
+  - gemfiles/middleman_4.2.gemfile
 matrix:
   fast_finish: true
   allow_failures:

@@ -1,4 +1,5 @@
 require 'middleman-core/application'
+require 'middleman-core/sitemap/resource'
 
 module Middleman
   module Imageoptim
