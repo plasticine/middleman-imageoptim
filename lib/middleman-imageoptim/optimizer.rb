@@ -72,11 +72,27 @@ module Middleman
       end
 
       def build_files
-        ::Middleman::Util.all_files_under(app.build_dir)
+        ::Middleman::Util.all_files_under(build_dir)
+      end
+
+      def build_dir
+        if Gem::Version.new(Middleman::VERSION) >= Gem::Version.new('4.0.0')
+          app.config[:build_dir]
+        else
+          app.build_dir
+        end
       end
 
       def say_status(status, interpolations = {})
-        builder.say_status(:imageoptim, status % interpolations) if builder
+        builder_thor.say_status(:imageoptim, status % interpolations) if builder
+      end
+
+      def builder_thor
+        if Gem::Version.new(Middleman::VERSION) >= Gem::Version.new('4.0.0')
+          builder.thor
+        else
+          builder
+        end
       end
 
       def optimizer

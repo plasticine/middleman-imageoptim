@@ -10,7 +10,15 @@ module Middleman
       end
 
       def path
-        File.join(app.build_dir, MANIFEST_FILENAME)
+        File.join(build_dir, MANIFEST_FILENAME)
+      end
+
+      def build_dir
+        if Gem::Version.new(Middleman::VERSION) >= Gem::Version.new('4.0.0')
+          app.config[:build_dir]
+        else
+          app.build_dir
+        end
       end
 
       def build_and_write(new_resources)

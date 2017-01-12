@@ -1,4 +1,5 @@
 require 'middleman-core/application'
+require 'middleman-core/sitemap/resource'
 
 module Middleman
   module Imageoptim
@@ -23,10 +24,6 @@ module Middleman
 
       def ignored?
         false
-      end
-
-      def metadata
-        @local_metadata.dup
       end
 
       private
