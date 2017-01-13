@@ -1,4 +1,5 @@
 require 'middleman-core'
+require 'middleman-core/sitemap'
 require 'middleman-imageoptim/optimizer'
 require 'middleman-imageoptim/options'
 require 'middleman-imageoptim/resource_list'
