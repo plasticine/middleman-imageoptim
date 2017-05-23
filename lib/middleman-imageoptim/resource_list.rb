@@ -72,7 +72,7 @@ module Middleman
         if Gem::Version.new(Middleman::VERSION) >= Gem::Version.new('4.0.0')
           File.join(app.root, app.config[:build_dir], filename)
         else
-          File.join(app.build_dir, filename)
+          File.join(app.config[:build_dir], filename)
         end
       end
     end
