@@ -15,8 +15,15 @@ Serving big images is for numb-skulls! Compress and optimise your imagery during
 
 Go set up the [image_optim](https://github.com/toy/image_optim) external utilities, then;
 
+### Middleman < 4.0
 ```ruby
 gem 'middleman-imageoptim'
+```
+
+### Middleman ≥ 4.0
+
+```ruby
+gem "middleman-imageoptim", :git => "https://github.com/plasticine/middleman-imageoptim", :branch => "master"
 ```
 
 ## Usage
