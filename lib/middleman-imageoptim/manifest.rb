@@ -3,14 +3,16 @@ module Middleman
     class Manifest
       MANIFEST_FILENAME = 'imageoptim.manifest.yml'.freeze
 
-      attr_reader :app
+      attr_reader :app, :path_option
 
-      def initialize(app)
+      def initialize(app, path_option = nil)
         @app = app
+        @path_option = path_option
       end
 
       def path
-        File.join(build_dir, MANIFEST_FILENAME)
+        base_path = path_option.present? ? path_option : build_dir
+        File.join(base_path, MANIFEST_FILENAME)
       end
 
       def build_dir
