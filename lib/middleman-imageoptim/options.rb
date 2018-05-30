@@ -46,8 +46,8 @@ module Middleman
       end
 
       def set_options(user_options)
-        OPTIONS.keys.each do |name|
-          instance_variable_set(:"@#{name}", user_options.fetch(name, OPTIONS[name]))
+        OPTIONS.each do |name, default_value|
+          instance_variable_set(:"@#{name}", user_options.fetch(name, default_value))
         end
       end
     end
