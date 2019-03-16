@@ -69,6 +69,9 @@ end
 
 ## Changelog
 
+##### `0.3.0`
+- https://github.com/plasticine/middleman-imageoptim/compare/v0.2.1...a539cae
+
 ##### `0.2.1`
 - Minor bugfix for 3.3.9 support.
 
