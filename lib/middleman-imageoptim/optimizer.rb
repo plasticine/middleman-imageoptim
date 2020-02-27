@@ -96,7 +96,15 @@ module Middleman
       end
 
       def optimizer
-        @optimizer ||= ImageOptim.new(options.imageoptim_options)
+        @optimizer ||= begin
+          imageoptim_options = if Gem::Version.new(Middleman::VERSION) >= Gem::Version.new('4.0.0')
+                                 options.to_h.except(:image_extensions, :manifest)
+                               else
+                                 options.imageoptim_options
+                               end
+
+          ImageOptim.new(imageoptim_options)
+        end
       end
 
       def manifest
