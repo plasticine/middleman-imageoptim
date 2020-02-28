@@ -3,14 +3,15 @@ module Middleman
     class Manifest
       MANIFEST_FILENAME = 'imageoptim.manifest.yml'.freeze
 
-      attr_reader :app
+      attr_reader :app, :path_option
 
-      def initialize(app)
+      def initialize(app, path_option = nil)
         @app = app
+        @path_option = path_option
       end
 
       def path
-        File.join(build_dir, MANIFEST_FILENAME)
+        @path ||= File.join(base_path, MANIFEST_FILENAME)
       end
 
       def build_dir
@@ -31,16 +32,26 @@ module Middleman
 
       private
 
+      def base_path
+        if path_option.present?
+          path_option
+        else
+          build_dir
+        end
+      end
+
       def resources
-        @resources ||= load(path)
+        @resources ||= begin
+          if File.exist?(path)
+            YAML.load_file(path)
+          else
+            {}
+          end
+        end
       end
 
       def dump(source)
         YAML.dump(source)
-      end
-
-      def load(path)
-        YAML.load(File.read(path))
       end
 
       def build(resources)
@@ -51,6 +62,8 @@ module Middleman
       end
 
       def write(manifest)
+        FileUtils.mkpath(base_path) unless File.exists?(path)
+
         File.open(path, 'w') do |manifest_file|
           manifest_file.write(manifest)
         end

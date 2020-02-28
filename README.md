@@ -39,6 +39,7 @@ Below is the default configuration showing all available options;
 activate :imageoptim do |options|
   # Use a build manifest to prevent re-compressing images between builds
   options.manifest = true
+  options.manifest_path = './build/'
 
   # Silence problematic image_optim workers
   options.skip_missing_workers = true

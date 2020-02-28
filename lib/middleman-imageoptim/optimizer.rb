@@ -100,7 +100,7 @@ module Middleman
       end
 
       def manifest
-        @manifest ||= Manifest.new(app)
+        @manifest ||= Manifest.new(app, options.manifest_path)
       end
 
       def update_bytes_saved(bytes)

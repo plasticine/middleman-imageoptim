@@ -4,7 +4,15 @@ Feature: Manifest
     Given a successfully built app at "basic-app" with flags "--verbose"
     Then the following files should exist:
       | build/imageoptim.manifest.yml |
-    Then the manifest should have the right timestamp for "build/images/table.jpg"
+    Then the manifest at "build" should have the right timestamp for "build/images/table.jpg"
+
+  Scenario: Save manifest at custom path
+    Given a fixture app "basic-app"
+    And app "basic-app" is using config "custom-manifest-path"
+    Given a successfully built app at "basic-app" with flags "--verbose"
+    Then the following files should exist:
+      | custom/manifest/path/imageoptim.manifest.yml |
+    Then the manifest at "custom/manifest/path" should have the right timestamp for "build/images/table.jpg"
 
   Scenario: Don't write a manifest file if it is disabled
     Given a fixture app "basic-app"

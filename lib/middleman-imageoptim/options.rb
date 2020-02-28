@@ -6,8 +6,10 @@ module Middleman
       # Mapping of valid option names to default values
       EXTENSION_OPTIONS = [
         :image_extensions,
-        :manifest
+        :manifest,
+        :manifest_path
       ].freeze
+
       OPTIONS = {
         advpng: { level: 4 },
         allow_lossy: false,
@@ -15,8 +17,9 @@ module Middleman
         image_extensions: %w(.png .jpg .jpeg .gif .svg),
         jpegoptim: { strip: ['all'], max_quality: 100 },
         jpegtran: { copy_chunks: false, progressive: true, jpegrescan: true },
-        nice: true,
         manifest: true,
+        manifest_path: nil,
+        nice: true,
         optipng: { level: 6, interlace: false },
         pack: true,
         pngcrush: { chunks: ['alla'], fix: false, brute: false },
@@ -46,8 +49,8 @@ module Middleman
       end
 
       def set_options(user_options)
-        OPTIONS.keys.each do |name|
-          instance_variable_set(:"@#{name}", user_options.fetch(name, OPTIONS[name]))
+        OPTIONS.each do |name, default_value|
+          instance_variable_set(:"@#{name}", user_options.fetch(name, default_value))
         end
       end
     end
