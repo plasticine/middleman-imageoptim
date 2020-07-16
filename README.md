@@ -72,6 +72,7 @@ end
 
 ##### `0.3.1`
 - Use latest `:image_optim` and `:image_optim_pack` gems.
+- Remove deprecated `:image_optim` extension name.
 
 ##### `0.3.0`
 - https://github.com/plasticine/middleman-imageoptim/compare/v0.2.1...a539cae
