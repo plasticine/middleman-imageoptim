@@ -10,10 +10,3 @@ require 'middleman-imageoptim/manifest_resource'
   require 'middleman-imageoptim/extension'
   ::Middleman::Imageoptim::Extension
 end
-
-::Middleman::Extensions.register(:image_optim) do
-  warn ':image_optim is deprecated. Please use `:imageoptim` instead.'
-
-  require 'middleman-imageoptim/extension'
-  ::Middleman::Imageoptim::Extension
-end

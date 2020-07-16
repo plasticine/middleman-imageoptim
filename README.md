@@ -23,7 +23,7 @@ gem 'middleman-imageoptim', '~> 0.2.1'
 ### Middleman ≥ 4.0
 
 ```ruby
-gem "middleman-imageoptim", '~> 0.3.0'
+gem "middleman-imageoptim", '~> 0.4.0'
 ```
 
 ## Usage
@@ -69,6 +69,10 @@ end
 ***
 
 ## Changelog
+
+##### `0.4.0`
+- Use latest `:image_optim` and `:image_optim_pack` gems.
+- Remove deprecated `:image_optim` extension name.
 
 ##### `0.3.0`
 - https://github.com/plasticine/middleman-imageoptim/compare/v0.2.1...a539cae
