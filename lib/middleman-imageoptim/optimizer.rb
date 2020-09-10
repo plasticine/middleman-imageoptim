@@ -43,7 +43,8 @@ module Middleman
           say_status '%{source} (%{percent_change} / %{size_change} %{size_change_type})', Utils.file_size_stats(source, destination)
           FileUtils.move(destination, source)
         else
-          say_status '[skipped] %{source} not updated', source: source
+          skip_message = '[skipped] %{source} - optimized version is identical to source (may have been previously optimized)'
+          say_status skip_message, source: source
         end
       ensure
         ensure_file_mode(mode, source) unless mode.nil?
