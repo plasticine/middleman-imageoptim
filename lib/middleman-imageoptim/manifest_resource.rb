@@ -29,10 +29,11 @@ module Middleman
       private
 
       def manifest_content
-        if @source_file.nil?
+        path = File.join(@app.config[:build_dir], @destination_path)
+        if !File.exist?(path)
           YAML.dump({})
         else
-          File.read(@source_file)
+          File.read(path)
         end
       end
     end
